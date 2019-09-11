@@ -1,0 +1,78 @@
+{
+    "acceptMappedClaims": null,
+    "addIns": [],
+    "allowGuestsSignIn": null,
+    "allowPassthroughUsers": null,
+    "appId": "a2769a9f-08da-475d-9f84-a3743bb51b12",
+    "appLogoUrl": null,
+    "appPermissions": null,
+    "appRoles": [],
+    "applicationTemplateId": null,
+    "availableToOtherTenants": true,
+    "deletionTimestamp": null,
+    "displayName": "mfdevBot",
+    "errorUrl": null,
+    "groupMembershipClaims": null,
+    "homepage": null,
+    "identifierUris": [],
+    "informationalUrls": {
+      "marketing": null,
+      "privacy": null,
+      "support": null,
+      "termsOfService": null
+    },
+    "isDeviceOnlyAuthSupported": null,
+    "keyCredentials": [],
+    "knownClientApplications": [],
+    "logo@odata.mediaContentType": "application/json;odata=minimalmetadata; charset=utf-8",
+    "logo@odata.mediaEditLink": "directoryObjects/20fc2742-19ef-4b50-b308-896e3284275c/Microsoft.DirectoryServices.Application/logo",
+    "logoUrl": null,
+    "logoutUrl": null,
+    "mainLogo@odata.mediaEditLink": "directoryObjects/20fc2742-19ef-4b50-b308-896e3284275c/Microsoft.DirectoryServices.Application/mainLogo",
+    "oauth2AllowIdTokenImplicitFlow": true,
+    "oauth2AllowImplicitFlow": false,
+    "oauth2AllowUrlPathMatching": false,
+    "oauth2Permissions": [
+      {
+        "adminConsentDescription": "Allow the application to access mfdevBot on behalf of the signed-in user.",
+        "adminConsentDisplayName": "Access mfdevBot",
+        "id": "47591419-90f5-45dc-93cd-bdf583c265d5",
+        "isEnabled": true,
+        "type": "User",
+        "userConsentDescription": "Allow the application to access mfdevBot on your behalf.",
+        "userConsentDisplayName": "Access mfdevBot",
+        "value": "user_impersonation"
+      }
+    ],
+    "oauth2RequirePostResponse": false,
+    "objectId": "20fc2742-19ef-4b50-b308-896e3284275c",
+    "objectType": "Application",
+    "odata.metadata": "https://graph.windows.net/5b438694-4d84-4561-8891-13a86a443556/$metadata#directoryObjects/@Element",
+    "odata.type": "Microsoft.DirectoryServices.Application",
+    "optionalClaims": null,
+    "orgRestrictions": [],
+    "parentalControlSettings": {
+      "countriesBlockedForMinors": [],
+      "legalAgeGroupRule": "Allow"
+    },
+    "passwordCredentials": [
+      {
+        "additionalProperties": null,
+        "customKeyIdentifier": null,
+        "endDate": "2020-09-11T15:30:26.369257+00:00",
+        "keyId": "857f8e33-7668-4534-9eff-709a674b1503",
+        "startDate": "2019-09-11T15:30:26.369257+00:00",
+        "value": null
+      }
+    ],
+    "preAuthorizedApplications": null,
+    "publicClient": null,
+    "publisherDomain": "swmail.onmicrosoft.com",
+    "recordConsentConditions": null,
+    "replyUrls": [],
+    "requiredResourceAccess": [],
+    "samlMetadataUrl": null,
+    "signInAudience": "AzureADMultipleOrgs",
+    "tokenEncryptionKeyId": null,
+    "wwwHomepage": null
+  }

@@ -1,0 +1,173 @@
+az group deployment create --name "mfbotdeploy" --resource-group "WADApps" --template-file "./deploymentTemplates/template-with-preexisting-rg.json" --parameters appId="a2769a9f-08da-475d-9f84-a3743bb51b12" appSecret="passwordSixteen!" botId="mfdevBot" newWebAppName="mfDevBot" existingAppServicePlan="WADApps" appServicePlanLocation="South Central US"
+
+az webapp deployment source config-zip --resource-group "WADApps" --name "mfDevBot" --src "bot.zip"
+
+az group deployment create output
+{
+  "id": "/subscriptions/8c542e2f-545b-46e3-8dd8-b8804b3ad7ac/resourceGroups/WADApps/providers/Microsoft.Resources/deployments/mfbotdeploy",
+  "location": null,
+  "name": "mfbotdeploy",
+  "properties": {
+    "correlationId": "eda649bd-81dd-4e2a-b2ce-d170a8d5c8f9",
+    "debugSetting": null,
+    "dependencies": [
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/8c542e2f-545b-46e3-8dd8-b8804b3ad7ac/resourceGroups/WADApps/providers/Microsoft.Web/serverfarms/WADApps",
+            "resourceGroup": "WADApps",
+            "resourceName": "WADApps",
+            "resourceType": "Microsoft.Web/serverfarms"
+          }
+        ],
+        "id": "/subscriptions/8c542e2f-545b-46e3-8dd8-b8804b3ad7ac/resourceGroups/WADApps/providers/Microsoft.Web/sites/mfDevBot",
+        "resourceGroup": "WADApps",
+        "resourceName": "mfDevBot",
+        "resourceType": "Microsoft.Web/sites"
+      },
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/8c542e2f-545b-46e3-8dd8-b8804b3ad7ac/resourceGroups/WADApps/providers/Microsoft.Web/sites/mfDevBot",
+            "resourceGroup": "WADApps",
+            "resourceName": "mfDevBot",
+            "resourceType": "Microsoft.Web/sites"
+          }
+        ],
+        "id": "/subscriptions/8c542e2f-545b-46e3-8dd8-b8804b3ad7ac/resourceGroups/WADApps/providers/Microsoft.BotService/botServices/mfdevBot",
+        "resourceGroup": "WADApps",
+        "resourceName": "mfdevBot",
+        "resourceType": "Microsoft.BotService/botServices"
+      }
+    ],
+    "duration": "PT20.7788867S",
+    "mode": "Incremental",
+    "onErrorDeployment": null,
+    "outputResources": [
+      {
+        "id": "/subscriptions/8c542e2f-545b-46e3-8dd8-b8804b3ad7ac/resourceGroups/WADApps/providers/Microsoft.BotService/botServices/mfdevBot",
+        "resourceGroup": "WADApps"
+      },
+      {
+        "id": "/subscriptions/8c542e2f-545b-46e3-8dd8-b8804b3ad7ac/resourceGroups/WADApps/providers/Microsoft.Web/serverfarms/WADApps",
+        "resourceGroup": "WADApps"
+      },
+      {
+        "id": "/subscriptions/8c542e2f-545b-46e3-8dd8-b8804b3ad7ac/resourceGroups/WADApps/providers/Microsoft.Web/sites/mfDevBot",
+        "resourceGroup": "WADApps"
+      }
+    ],
+    "outputs": null,
+    "parameters": {
+      "appId": {
+        "type": "String",
+        "value": "a2769a9f-08da-475d-9f84-a3743bb51b12"
+      },
+      "appSecret": {
+        "type": "String",
+        "value": "passwordSixteen!"
+      },
+      "appServicePlanLocation": {
+        "type": "String",
+        "value": "South Central US"
+      },
+      "botId": {
+        "type": "String",
+        "value": "mfdevBot"
+      },
+      "botSku": {
+        "type": "String",
+        "value": "F0"
+      },
+      "existingAppServicePlan": {
+        "type": "String",
+        "value": "WADApps"
+      },
+      "newAppServicePlanName": {
+        "type": "String",
+        "value": ""
+      },
+      "newAppServicePlanSku": {
+        "type": "Object",
+        "value": {
+          "capacity": 1,
+          "family": "S",
+          "name": "S1",
+          "size": "S1",
+          "tier": "Standard"
+        }
+      },
+      "newWebAppName": {
+        "type": "String",
+        "value": "mfDevBot"
+      }
+    },
+    "parametersLink": null,
+    "providers": [
+      {
+        "id": null,
+        "namespace": "Microsoft.Web",
+        "registrationState": null,
+        "resourceTypes": [
+          {
+            "aliases": null,
+            "apiVersions": null,
+            "locations": [
+              "southcentralus"
+            ],
+            "properties": null,
+            "resourceType": "sites"
+          }
+        ]
+      },
+      {
+        "id": null,
+        "namespace": "Microsoft.BotService",
+        "registrationState": null,
+        "resourceTypes": [
+          {
+            "aliases": null,
+            "apiVersions": null,
+            "locations": [
+              "global"
+            ],
+            "properties": null,
+            "resourceType": "botServices"
+          }
+        ]
+      }
+    ],
+    "provisioningState": "Succeeded",
+    "template": null,
+    "templateHash": "554788647258636492",
+    "templateLink": null,
+    "timestamp": "2019-09-11T18:51:43.924327+00:00"
+  },
+  "resourceGroup": "WADApps",
+  "type": null
+}
+
+
+az webapp deployment output
+{
+  "active": true,
+  "author": "N/A",
+  "author_email": "N/A",
+  "complete": true,
+  "deployer": "Push-Deployer",
+  "end_time": "2019-09-11T19:16:20.8012623Z",
+  "id": "fb6dccb4141c4c1191dfa05a71077ba2",
+  "is_readonly": true,
+  "is_temp": false,
+  "last_success_end_time": "2019-09-11T19:16:20.8012623Z",
+  "log_url": "https://mfdevbot.scm.azurewebsites.net/api/deployments/latest/log",
+  "message": "Created via a push deployment",
+  "progress": "",
+  "provisioningState": null,
+  "received_time": "2019-09-11T19:16:15.5972357Z",
+  "site_name": "mfDevBot",
+  "start_time": "2019-09-11T19:16:15.7222192Z",
+  "status": 4,
+  "status_text": "",
+  "url": "https://mfdevbot.scm.azurewebsites.net/api/deployments/latest"
+}
