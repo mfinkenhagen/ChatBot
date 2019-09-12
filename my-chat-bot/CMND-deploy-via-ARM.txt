@@ -1,14 +1,18 @@
 az group deployment create --name "mfbotdeploy" --resource-group "WADApps" --template-file "./deploymentTemplates/template-with-preexisting-rg.json" --parameters appId="a2769a9f-08da-475d-9f84-a3743bb51b12" appSecret="passwordSixteen!" botId="mfdevBot" newWebAppName="mfDevBot" existingAppServicePlan="WADApps" appServicePlanLocation="South Central US"
+az group deployment create --name "Deploy_BSW-MFDevBot" --resource-group "WADApps" --template-file "./deploymentTemplates/template-with-preexisting-rg.json" --parameters appId="5a797a4a-da31-4b83-b163-a70476d573ba" appSecret="passwordSixteen!" botId="BSW-MFDevBot" newWebAppName="BSW-MFDevBot" existingAppServicePlan="WADApps" appServicePlanLocation="South Central US"
+Compress-Archive -Path * -DestinationPath bot.zip
+az webapp deployment source config-zip --resource-group "WADApps" --name "BSW-MFDevBot" --src "bot.zip"
 
-az webapp deployment source config-zip --resource-group "WADApps" --name "mfDevBot" --src "bot.zip"
 
-az group deployment create output
+
+PS C:\Users\Mark\Source\Repos_GitHub\ChatBot\my-chat-bot> az group deployment create --name "Deploy_BSW-MFDevBot" --resource-group "WADApps" --template-file "./deploymentTemplates/template-with-preexisting-rg.json" 
+--parameters appId="5a797a4a-da31-4b83-b163-a70476d573ba" appSecret="passwordSixteen!" botId="ID_BSW-MFDevBot" newWebAppName="BSW-MFDevBot" existingAppServicePlan="WADApps" appServicePlanLocation="South Central US" 
 {
-  "id": "/subscriptions/8c542e2f-545b-46e3-8dd8-b8804b3ad7ac/resourceGroups/WADApps/providers/Microsoft.Resources/deployments/mfbotdeploy",
+  "id": "/subscriptions/8c542e2f-545b-46e3-8dd8-b8804b3ad7ac/resourceGroups/WADApps/providers/Microsoft.Resources/deployments/Deploy_BSW-MFDevBot",
   "location": null,
-  "name": "mfbotdeploy",
+  "name": "Deploy_BSW-MFDevBot",
   "properties": {
-    "correlationId": "eda649bd-81dd-4e2a-b2ce-d170a8d5c8f9",
+    "correlationId": "4ba1524c-b9c5-4a9a-a292-28e061bd376e",
     "debugSetting": null,
     "dependencies": [
       {
@@ -20,40 +24,36 @@ az group deployment create output
             "resourceType": "Microsoft.Web/serverfarms"
           }
         ],
-        "id": "/subscriptions/8c542e2f-545b-46e3-8dd8-b8804b3ad7ac/resourceGroups/WADApps/providers/Microsoft.Web/sites/mfDevBot",
+        "id": "/subscriptions/8c542e2f-545b-46e3-8dd8-b8804b3ad7ac/resourceGroups/WADApps/providers/Microsoft.Web/sites/BSW-MFDevBot",
         "resourceGroup": "WADApps",
-        "resourceName": "mfDevBot",
+        "resourceName": "BSW-MFDevBot",
         "resourceType": "Microsoft.Web/sites"
       },
       {
         "dependsOn": [
           {
-            "id": "/subscriptions/8c542e2f-545b-46e3-8dd8-b8804b3ad7ac/resourceGroups/WADApps/providers/Microsoft.Web/sites/mfDevBot",
+            "id": "/subscriptions/8c542e2f-545b-46e3-8dd8-b8804b3ad7ac/resourceGroups/WADApps/providers/Microsoft.Web/sites/BSW-MFDevBot",
             "resourceGroup": "WADApps",
-            "resourceName": "mfDevBot",
+            "resourceName": "BSW-MFDevBot",
             "resourceType": "Microsoft.Web/sites"
           }
         ],
-        "id": "/subscriptions/8c542e2f-545b-46e3-8dd8-b8804b3ad7ac/resourceGroups/WADApps/providers/Microsoft.BotService/botServices/mfdevBot",
+        "id": "/subscriptions/8c542e2f-545b-46e3-8dd8-b8804b3ad7ac/resourceGroups/WADApps/providers/Microsoft.BotService/botServices/ID_BSW-MFDevBot",
         "resourceGroup": "WADApps",
-        "resourceName": "mfdevBot",
+        "resourceName": "ID_BSW-MFDevBot",
         "resourceType": "Microsoft.BotService/botServices"
       }
     ],
-    "duration": "PT20.7788867S",
+    "duration": "PT24.3175198S",
     "mode": "Incremental",
     "onErrorDeployment": null,
     "outputResources": [
       {
-        "id": "/subscriptions/8c542e2f-545b-46e3-8dd8-b8804b3ad7ac/resourceGroups/WADApps/providers/Microsoft.BotService/botServices/mfdevBot",
+        "id": "/subscriptions/8c542e2f-545b-46e3-8dd8-b8804b3ad7ac/resourceGroups/WADApps/providers/Microsoft.BotService/botServices/ID_BSW-MFDevBot",
         "resourceGroup": "WADApps"
       },
       {
-        "id": "/subscriptions/8c542e2f-545b-46e3-8dd8-b8804b3ad7ac/resourceGroups/WADApps/providers/Microsoft.Web/serverfarms/WADApps",
-        "resourceGroup": "WADApps"
-      },
-      {
-        "id": "/subscriptions/8c542e2f-545b-46e3-8dd8-b8804b3ad7ac/resourceGroups/WADApps/providers/Microsoft.Web/sites/mfDevBot",
+        "id": "/subscriptions/8c542e2f-545b-46e3-8dd8-b8804b3ad7ac/resourceGroups/WADApps/providers/Microsoft.Web/sites/BSW-MFDevBot",
         "resourceGroup": "WADApps"
       }
     ],
@@ -61,7 +61,7 @@ az group deployment create output
     "parameters": {
       "appId": {
         "type": "String",
-        "value": "a2769a9f-08da-475d-9f84-a3743bb51b12"
+        "value": "5a797a4a-da31-4b83-b163-a70476d573ba"
       },
       "appSecret": {
         "type": "String",
@@ -73,7 +73,7 @@ az group deployment create output
       },
       "botId": {
         "type": "String",
-        "value": "mfdevBot"
+        "value": "ID_BSW-MFDevBot"
       },
       "botSku": {
         "type": "String",
@@ -99,7 +99,7 @@ az group deployment create output
       },
       "newWebAppName": {
         "type": "String",
-        "value": "mfDevBot"
+        "value": "BSW-MFDevBot"
       }
     },
     "parametersLink": null,
@@ -107,11 +107,13 @@ az group deployment create output
       {
         "id": null,
         "namespace": "Microsoft.Web",
+        "registrationPolicy": null,
         "registrationState": null,
         "resourceTypes": [
           {
             "aliases": null,
             "apiVersions": null,
+            "capabilities": null,
             "locations": [
               "southcentralus"
             ],
@@ -123,51 +125,23 @@ az group deployment create output
       {
         "id": null,
         "namespace": "Microsoft.BotService",
+        "registrationPolicy": null,
         "registrationState": null,
         "resourceTypes": [
           {
             "aliases": null,
             "apiVersions": null,
+            "capabilities": null,
             "locations": [
-              "global"
-            ],
             "properties": null,
-            "resourceType": "botServices"
-          }
-        ]
       }
     ],
     "provisioningState": "Succeeded",
     "template": null,
     "templateHash": "554788647258636492",
     "templateLink": null,
-    "timestamp": "2019-09-11T18:51:43.924327+00:00"
+    "timestamp": "2019-09-12T15:57:54.938388+00:00"
   },
   "resourceGroup": "WADApps",
-  "type": null
-}
-
-
-az webapp deployment output
-{
-  "active": true,
-  "author": "N/A",
-  "author_email": "N/A",
-  "complete": true,
-  "deployer": "Push-Deployer",
-  "end_time": "2019-09-11T19:16:20.8012623Z",
-  "id": "fb6dccb4141c4c1191dfa05a71077ba2",
-  "is_readonly": true,
-  "is_temp": false,
-  "last_success_end_time": "2019-09-11T19:16:20.8012623Z",
-  "log_url": "https://mfdevbot.scm.azurewebsites.net/api/deployments/latest/log",
-  "message": "Created via a push deployment",
-  "progress": "",
-  "provisioningState": null,
-  "received_time": "2019-09-11T19:16:15.5972357Z",
-  "site_name": "mfDevBot",
-  "start_time": "2019-09-11T19:16:15.7222192Z",
-  "status": 4,
-  "status_text": "",
-  "url": "https://mfdevbot.scm.azurewebsites.net/api/deployments/latest"
+  "type": "Microsoft.Resources/deployments"
 }
