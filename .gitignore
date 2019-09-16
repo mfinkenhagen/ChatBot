@@ -59,3 +59,7 @@ typings/
 
 # next.js build output
 .next
+/my-chat-bot
+/myChatBot/.vs/MyChatBot/v16
+/myChatBot/MyChatBot/obj/Debug/netcoreapp2.1
+/myChatBot/MyChatBot/obj/Release/netcoreapp2.1
