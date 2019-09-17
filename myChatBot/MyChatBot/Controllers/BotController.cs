@@ -4,6 +4,7 @@
 // Generated with Bot Builder V4 SDK Template for Visual Studio EchoBot v4.5.0
 
 using System.Threading.Tasks;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
@@ -22,6 +23,7 @@ namespace MyChatBot.Controllers
 
         public BotController(IBotFrameworkHttpAdapter adapter, IBot bot)
         {
+            Debug.WriteLine("!!! BotController constructor");
             Adapter = adapter;
             Bot = bot;
         }
@@ -29,6 +31,7 @@ namespace MyChatBot.Controllers
         [HttpPost]
         public async Task PostAsync()
         {
+            Debug.WriteLine("!!! BotController PostAsync");
             // Delegate the processing of the HTTP POST to the adapter.
             // The adapter will invoke the bot.
             await Adapter.ProcessAsync(Request, Response, Bot);
