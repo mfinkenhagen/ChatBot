@@ -24,13 +24,14 @@ namespace MyChatBot.Bots
                 $"\n\t activity Value: {act.Value}" +
                 $"\n\t activity Text: {act.Text}");
           
-            
-            await turnContext.SendActivityAsync(MessageFactory.Text($"Echo: {turnContext.Activity.Text}"), cancellationToken);
+              
+            await turnContext.SendActivityAsync(MessageFactory.Text($"{turnContext.Activity.Text}"), cancellationToken);
         }
 
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
             Debug.WriteLine("*** EchoBot OnMembersAddedAsync");
+            await turnContext.SendActivityAsync(MessageFactory.Text($"Id: Name {turnContext.Activity.Recipient.Id}: {turnContext.Activity.Recipient.Name}"), cancellationToken);
             foreach (var member in membersAdded)
             {
                 Debug.WriteLine($"*** EchoBot OnMembersAddedAsync \n\tmember Id: Name {member.Id}: {member.Name}" +
