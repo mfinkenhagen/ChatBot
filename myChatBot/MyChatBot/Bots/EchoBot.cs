@@ -19,28 +19,29 @@ namespace MyChatBot.Bots
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             IMessageActivity act = turnContext.Activity;
-            Debug.WriteLine("*** EchoBot OnMessageActivityAsync activity" +
+            
+            Debug.WriteLine($"*** EchoBot OnMessageActivityAsync activity" +
                 $"\n\t activity Id: {act.Id}" +
                 $"\n\t activity Value: {act.Value}" +
                 $"\n\t activity Text: {act.Text}");
           
               
-            await turnContext.SendActivityAsync(MessageFactory.Text($"{turnContext.Activity.Text}"), cancellationToken);
+            await turnContext.SendActivityAsync(MessageFactory.Text($"> {turnContext.Activity.Text}"), cancellationToken);
         }
 
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
             Debug.WriteLine("*** EchoBot OnMembersAddedAsync");
-            await turnContext.SendActivityAsync(MessageFactory.Text($"OnMembersAddedAsync START Id: Name {turnContext.Activity.Recipient.Id}: {turnContext.Activity.Recipient.Name}"), cancellationToken);
+            //await turnContext.SendActivityAsync(MessageFactory.Text($"OnMembersAddedAsync START Id: Name {turnContext.Activity.Recipient.Id}: {turnContext.Activity.Recipient.Name}"), cancellationToken);
             foreach (var member in membersAdded)
             {
-                Debug.WriteLine($"*** EchoBot OnMembersAddedAsync \n\tmember Id: Name {member.Id}: {member.Name}" +
-                    $"\n\tturnContext.Activity.Recipient Id: Name {turnContext.Activity.Recipient.Id}: {turnContext.Activity.Recipient.Name}");
+                //Debug.WriteLine($"*** EchoBot OnMembersAddedAsync \n\tmember Id: Name {member.Id}: {member.Name}" +
+                //    $"\n\tturnContext.Activity.Recipient Id: Name {turnContext.Activity.Recipient.Id}: {turnContext.Activity.Recipient.Name}");
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
                     Debug.WriteLine("*** EchoBot OnMembersAddedAsync call SendActivityAsync");
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"EchoBot OnMembersAddedAsync \n\tmember Id: Name {member.Id}: {member.Name}" +
-                    $"\n\tturnContext.Activity.Recipient Id: Name {turnContext.Activity.Recipient.Id}: {turnContext.Activity.Recipient.Name}"), cancellationToken);
+                    //await turnContext.SendActivityAsync(MessageFactory.Text($"EchoBot OnMembersAddedAsync \n\tmember Id: Name {member.Id}: {member.Name}" +
+                    //$"\n\tturnContext.Activity.Recipient Id: Name {turnContext.Activity.Recipient.Id}: {turnContext.Activity.Recipient.Name}"), cancellationToken);
                     
                     List<CardAction> actions = new List<CardAction>();
                     actions.Add(new CardAction(title: "IT Knowledge", type: ActionTypes.ImBack, value: "IT"));
@@ -51,7 +52,7 @@ namespace MyChatBot.Bots
                     actions.Add(new CardAction(title: "Vulnerabilities", type: ActionTypes.ImBack, value: "Vulnerabilities"));
                     actions.ToArray();
 
-                    //await turnContext.SendActivityAsync(MessageFactory.SuggestedActions(actions, text:"Select a knowledge base"), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.SuggestedActions(actions, text:"Select a knowledge base"), cancellationToken);
                     
                    /* BasicCard card = new BasicCard();
                     card.Title = "Knowledge Banks";

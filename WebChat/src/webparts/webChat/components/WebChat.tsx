@@ -7,18 +7,23 @@ import ReactWebChat from 'botframework-webchat';
 
 
 export default class WebChat extends React.Component<IWebChatProps, {}> {
-  private directLine = new DirectLine({token:'XJTej9F_l3Q.f_4jzEt_cXMsBvm4gUhGxVoi9oP3SqwMmsVB7IvMu3s'});
+  private directLine = new DirectLine({token:'r6uV_IRPDGQ.fA0nFdwxRWQD_h2wqREv9rua4NKF0XwFdF-6sjW0lPc'});
   constructor(props){
     super(props);
     
   }
 
+  public componentDidMount(){
+    this.directLine.postActivity({from:{id:"mfinkenhagen",name:"Mark"},name:'requestWelcomeDialog',type:'event',value:''})
+    .subscribe((id)=>{
+      console.log(`WebChat componentDidMount trigger "requestWelcomeDialog" sent got id ${id}`);
+    });
+  }
   public render(): React.ReactElement<IWebChatProps> {
     return (
       <div>
-      <iframe 
-        src='https://webchat.botframework.com/embed/mf-D3vB0t?s=XJTej9F_l3Q.f_4jzEt_cXMsBvm4gUhGxVoi9oP3SqwMmsVB7IvMu3s'  
-        style={{minWidth: '400px', width: '100%', minHeight: '500px'}}></iframe>
+        <ReactWebChat directLine={this.directLine} userID="mfinkenhagen"username="Mark"/>
+
       </div>
     );
   }
