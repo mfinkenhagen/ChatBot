@@ -1,10 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\my-chat-bot",
+    "\\myChatBot",
+    "\\myChatBot\\.vs",
     "\\myChatBot\\MyChatBot",
+    "\\myChatBot\\MyChatBot\\Bots",
     "\\myChatBot\\MyChatBot\\DeploymentTemplates"
   ],
-  "SelectedNode": "\\myChatBot",
+  "SelectedNode": "\\myChatBot\\MyChatBot\\Bots\\EchoBot.cs",
   "PreviewInSolutionExplorer": false
 }
