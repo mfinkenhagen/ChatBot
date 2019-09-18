@@ -5465,7 +5465,7 @@
       ]
     },
     "Microsoft.AspNetCore.Razor.Design/2.1.1": {
-      "sha512": "1XHObHLx6A0/57ZmLG9gfKMO/Z/gQjRXPFWQDMlPZGYwcfgufvSdmI2+RYvR5DGkbba9HIHC35ClNQ2yVNIohw==",
+      "sha512": "f8PKGcxiezL1RVqmnmrazj24Mj4KCTSXqwdotl7Lc+82h8iLV7ItxEIShTJakG7M9iw0ZuCocM0J/IhYesdQrg==",
       "type": "package",
       "path": "microsoft.aspnetcore.razor.design/2.1.1",
       "hasTools": true,
@@ -12436,23 +12436,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Mark\\.nuget\\packages\\": {},
+    "C:\\Users\\mfinkenhagen\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mark\\Source\\Repos_GitHub\\ChatBot\\MyChatBot\\MyChatBot\\MyChatBot.csproj",
+      "projectUniqueName": "C:\\Source\\Repo-GitHub\\ChatBot\\myChatBot\\MyChatBot\\MyChatBot.csproj",
       "projectName": "MyChatBot",
-      "projectPath": "C:\\Users\\Mark\\Source\\Repos_GitHub\\ChatBot\\MyChatBot\\MyChatBot\\MyChatBot.csproj",
-      "packagesPath": "C:\\Users\\Mark\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mark\\Source\\Repos_GitHub\\ChatBot\\MyChatBot\\MyChatBot\\obj\\",
+      "projectPath": "C:\\Source\\Repo-GitHub\\ChatBot\\myChatBot\\MyChatBot\\MyChatBot.csproj",
+      "packagesPath": "C:\\Users\\mfinkenhagen\\.nuget\\packages\\",
+      "outputPath": "C:\\Source\\Repo-GitHub\\ChatBot\\myChatBot\\MyChatBot\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Mark\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mfinkenhagen\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

@@ -39,7 +39,7 @@ namespace MyChatBot.Bots
                 {
                     Debug.WriteLine("*** EchoBot OnMembersAddedAsync call SendActivityAsync");
                     //await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome!"), cancellationToken);
-                    /*
+                    
                     List<CardAction> actions = new List<CardAction>();
                     actions.Add(new CardAction(title: "IT Knowledge", type: ActionTypes.ImBack, value: "IT"));
                     actions.Add(new CardAction(title: "IT Public Knowledge", type: ActionTypes.ImBack, value: "IT Public"));
@@ -50,8 +50,8 @@ namespace MyChatBot.Bots
                     actions.ToArray();
 
                     await turnContext.SendActivityAsync(MessageFactory.SuggestedActions(actions, text:"Select a knowledge base"), cancellationToken);
-                    */
-                    BasicCard card = new BasicCard();
+                    
+                   /* BasicCard card = new BasicCard();
                     card.Title = "Knowledge Banks";
                     card.Text = "Chools which Knowldge bank to ask your question";
                     List<CardAction> actions = new List<CardAction>();
@@ -68,6 +68,7 @@ namespace MyChatBot.Bots
                     att.Content = card;
 
                     await turnContext.SendActivityAsync(MessageFactory.Attachment(att), cancellationToken);
+                    */
                 }
             }
         }
