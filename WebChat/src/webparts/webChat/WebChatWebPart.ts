@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
+import { WebPartContext } from "@microsoft/sp-webpart-base";
 import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
@@ -12,7 +13,7 @@ import WebChat from './components/WebChat';
 import { IWebChatProps } from './components/IWebChatProps';
 
 export interface IWebChatWebPartProps {
-  description: string;
+  context: WebPartContext;
 }
 
 export default class WebChatWebPart extends BaseClientSideWebPart<IWebChatWebPartProps> {
@@ -21,7 +22,7 @@ export default class WebChatWebPart extends BaseClientSideWebPart<IWebChatWebPar
     const element: React.ReactElement<IWebChatProps > = React.createElement(
       WebChat,
       {
-        description: this.properties.description
+        context: this.context
       }
     );
 
