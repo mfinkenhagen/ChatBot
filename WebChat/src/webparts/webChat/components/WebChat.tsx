@@ -7,7 +7,7 @@ import ReactWebChat from 'botframework-webchat';
 
 
 export default class WebChat extends React.Component<IWebChatProps, {}> {
-  private directLine = new DirectLine({token:''});
+  private directLine = new DirectLine({token:'XJTej9F_l3Q.f_4jzEt_cXMsBvm4gUhGxVoi9oP3SqwMmsVB7IvMu3s'});
   constructor(props){
     super(props);
     
@@ -15,8 +15,11 @@ export default class WebChat extends React.Component<IWebChatProps, {}> {
 
   public render(): React.ReactElement<IWebChatProps> {
     return (
-      <ReactWebChat directLine={ this.directLine } userID='YOUR_USER_ID' />
-      
+      <div>
+      <iframe 
+        src='https://webchat.botframework.com/embed/mf-D3vB0t?s=XJTej9F_l3Q.f_4jzEt_cXMsBvm4gUhGxVoi9oP3SqwMmsVB7IvMu3s'  
+        style={{minWidth: '400px', width: '100%', minHeight: '500px'}}></iframe>
+      </div>
     );
   }
 }
