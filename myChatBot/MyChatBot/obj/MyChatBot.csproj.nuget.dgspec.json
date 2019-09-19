@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Source\\Repo-GitHub\\ChatBot\\myChatBot\\MyChatBot\\MyChatBot.csproj": {}
+    "C:\\Users\\Mark\\Source\\Repos_GitHub\\ChatBot\\myChatBot\\MyChatBot\\MyChatBot.csproj": {}
   },
   "projects": {
-    "C:\\Source\\Repo-GitHub\\ChatBot\\myChatBot\\MyChatBot\\MyChatBot.csproj": {
+    "C:\\Users\\Mark\\Source\\Repos_GitHub\\ChatBot\\myChatBot\\MyChatBot\\MyChatBot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Source\\Repo-GitHub\\ChatBot\\myChatBot\\MyChatBot\\MyChatBot.csproj",
+        "projectUniqueName": "C:\\Users\\Mark\\Source\\Repos_GitHub\\ChatBot\\myChatBot\\MyChatBot\\MyChatBot.csproj",
         "projectName": "MyChatBot",
-        "projectPath": "C:\\Source\\Repo-GitHub\\ChatBot\\myChatBot\\MyChatBot\\MyChatBot.csproj",
-        "packagesPath": "C:\\Users\\mfinkenhagen\\.nuget\\packages\\",
-        "outputPath": "C:\\Source\\Repo-GitHub\\ChatBot\\myChatBot\\MyChatBot\\obj\\",
+        "projectPath": "C:\\Users\\Mark\\Source\\Repos_GitHub\\ChatBot\\myChatBot\\MyChatBot\\MyChatBot.csproj",
+        "packagesPath": "C:\\Users\\Mark\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Mark\\Source\\Repos_GitHub\\ChatBot\\myChatBot\\MyChatBot\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\mfinkenhagen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mark\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -46,6 +46,10 @@
               "target": "Package",
               "version": "[2.1.1, )",
               "autoReferenced": true
+            },
+            "Microsoft.Bot.Builder.Dialogs": {
+              "target": "Package",
+              "version": "[4.5.2, )"
             },
             "Microsoft.Bot.Builder.Integration.AspNet.Core": {
               "target": "Package",
