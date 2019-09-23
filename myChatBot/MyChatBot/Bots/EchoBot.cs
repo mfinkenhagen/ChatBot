@@ -13,6 +13,7 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using MyChatBot.Model;
 using Newtonsoft.Json;
+using System;
 
 namespace MyChatBot.Bots {
 
@@ -27,23 +28,43 @@ namespace MyChatBot.Bots {
 
 
 		protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken) {
-			var reply = ProcessInput(turnContext);
-			await turnContext.SendActivityAsync($"Retriving List of {turnContext.Activity.Text}");
-			await turnContext.SendActivityAsync(reply, cancellationToken);
+			await ProcessInput(turnContext, cancellationToken);
+			//await UpdateList(turnContext, cancellationToken);
+			//await turnContext.SendActivityAsync($"Retriving List of {turnContext.Activity.Text}");
+			//await turnContext.SendActivityAsync(reply, cancellationToken);
 			//await ListHospitalsAsync(turnContext, cancellationToken, await GetList());
-			await ListFacillities(turnContext, cancellationToken);
+			//await ListFacillities(turnContext, cancellationToken);
 
 
 		}
 
-		private static async Task ListFacillities(ITurnContext turnContext, CancellationToken cancellationToken) {
-			string list = turnContext.Activity.Text.Substring(5);
-			string url = $"{baseUrl}/Lookups?$filter=Name eq '{list}'&$expand=LookupItems";
+		private static async Task ProcessInput(ITurnContext turnContext, CancellationToken cancellationToken) {
+			var activity = turnContext.Activity;
+			//turnContext.Activity.Value;
+			Lookup lu = JsonConvert.DeserializeObject<Lookup>(activity.Value.ToString());
+			LookupItem lui = null;
+			IMessageActivity reply = MessageFactory.Text($"Message from ProcessInput loading {lu.Name} areas");
+			if (lu.Name == null) {
+				lui = JsonConvert.DeserializeObject<LookupItem>(activity.Value.ToString());
+				await ListAreas(lui, turnContext, cancellationToken);
+			} else {
+				await ListFacillities(turnContext, cancellationToken);
+			}
+
+
+		}
+
+
+
+		private static async Task ListAreas(LookupItem lui, ITurnContext turnContext, CancellationToken cancellationToken) {
+			Lookup lu;
+			List<CardAction> buttons = new List<CardAction>();
+			string list =lui.Label;
+			await turnContext.SendActivityAsync($"Retriving areas for [{list}]");
+			string url = baseUrl + "Lookups?$filter=Description eq '" +("List of Areas for Hand Hygien facility " + list + "'").Replace(' ','+') + "&$expand=LookupItems";
+			await turnContext.SendActivityAsync($"{list} url {url}");
 			StringBuilder json = new StringBuilder();
 			oData odata;
-			Lookup lu;
-			List<CardAction> buttons = new List<CardAction>();		
-
 			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 			request.ContentType = "application/json; charset=utf-8";
 			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -55,10 +76,44 @@ namespace MyChatBot.Bots {
 				lu = odata.Value[0];
 			}
 
-			foreach(LookupItem facility in lu.LookupItems) {
-				buttons.Add(new CardAction(title: $"{facility.Label}", type: ActionTypes.ImBack, value: $"{facility.Label}"));
+			foreach (LookupItem facility in lu.LookupItems) {
+				buttons.Add(new CardAction(title: $"{facility.Label}", type: ActionTypes.MessageBack, value: facility, text: "LookupItem", displayText: $"List {facility.Label} areas."));
 			}
-			buttons.Add(new CardAction(title: $"Add a new {lu.Name.Substring(lu.Name.Length - 1)}", type: ActionTypes.ImBack, value: $"Add {lu.Name.Substring(lu.Name.Length - 1)}"));
+			buttons.Add(new CardAction(title: $"Add a new {lu.Name.Substring(0, lu.Name.Length - 1)}", type: ActionTypes.ImBack, value: $"Add {lu.Name.Substring(0, lu.Name.Length - 1)}"));
+
+			var card = new HeroCard {
+				Title = $"{lu.Name}",
+				Text = $"{lu.Description}",
+				Buttons = buttons,
+				Subtitle = " Pick one",
+			};
+			IMessageActivity reply = MessageFactory.Attachment(card.ToAttachment());
+			await turnContext.SendActivityAsync(reply, cancellationToken);
+
+		}
+		private static async Task ListFacillities(ITurnContext turnContext, CancellationToken cancellationToken) {
+			Lookup lu = JsonConvert.DeserializeObject<Lookup>(turnContext.Activity.Value.ToString());
+			List<CardAction> buttons = new List<CardAction>();		
+
+			//string list = turnContext.Activity.Text.Substring(5);
+			//string url = $"{baseUrl}/Lookups?$filter=Name eq '{list}'&$expand=LookupItems";
+			//StringBuilder json = new StringBuilder();
+			//oData odata;
+			//HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+			//request.ContentType = "application/json; charset=utf-8";
+			//HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+			////Movie m = JsonConvert.DeserializeObject<Movie>(json);
+			//using (var sr = new StreamReader(response.GetResponseStream())) {
+			//	json.Append(sr.ReadToEnd());
+			//	odata = JsonConvert.DeserializeObject<oData>(json.ToString());
+			//	//var jo = JObject.Parse(json.ToString());
+			//	lu = odata.Value[0];
+			//}
+
+			foreach(LookupItem facility in lu.LookupItems) {
+				buttons.Add(new CardAction(title: $"{facility.Label}", type: ActionTypes.MessageBack, value: facility, text: "LookupItem",  displayText: $"List {facility.Label} areas."));
+			}
+			buttons.Add(new CardAction(title: $"Add a new {lu.Name.Substring(0,lu.Name.Length - 1)}", type: ActionTypes.ImBack, value: $"Add {lu.Name.Substring(0,lu.Name.Length - 1)}"));
 
 			var card = new HeroCard {
 				Title = $"{lu.Name}",
@@ -71,13 +126,105 @@ namespace MyChatBot.Bots {
 		}
 
 
-		private static IMessageActivity ProcessInput(ITurnContext turnContext) {
-			var activity = turnContext.Activity;
-			IMessageActivity reply = MessageFactory.Text($"Message from ProcessInput loading {activity.Text} areas");
-			return reply;
+		/*
+		private static async Task ListAreas(LookupItem lui, ITurnContext turnContext, CancellationToken cancellationToken) {
+			string url = $"{baseUrl}/Lookups?$filter=Description eq 'List of Areas for Hand Hygien facility {lui.Label}'";
+			StringBuilder json = new StringBuilder();
+			oData odata;
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+			request.ContentType = "application/json; charset=utf-8";
+			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+			using (var sr = new StreamReader(response.GetResponseStream())) {
+				json.Append(sr.ReadToEnd());
+				odata = JsonConvert.DeserializeObject<oData>(json.ToString());
+				//var jo = JObject.Parse(json.ToString());
+				var label = odata.Value[0].Name;
+			}
+
+			List<CardAction> buttons = new List<CardAction>();
+			foreach (Lookup lu in odata.Value) {
+				buttons.Add(new CardAction(title: lu.Name, type: ActionTypes.MessageBack, value: lu, displayText: $"List {lu.Name} facilities."));
+			}
+			var card = new HeroCard {
+				Title = $"Areas for {lui.Label}",
+				Text = "Which area do you need to manage?",
+				Buttons = buttons,
+				Subtitle = " Pick one",
+			};
+			IMessageActivity reply = MessageFactory.Attachment(card.ToAttachment());
+			await turnContext.SendActivityAsync(reply, cancellationToken);
 
 		}
+		*/
 
+
+		private static async Task UpdateList(ITurnContext turnContext, CancellationToken cancellationToken) {
+			string url = $"{baseUrl}Lookups(7)";
+
+
+
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+			request.ContentType = "application/json; charset=utf-8";
+			request.Method = "PUT";
+			request.Accept = "application/json";
+			Lookup facility = new Lookup("Temple Childrens", "List of Areas for Hand Hygien facility Temple Childrens");
+			facility.Id = 7;
+
+
+
+
+			byte[] bary = Encoding.UTF8.GetBytes(facility.serialize());
+			request.ContentLength = bary.Length;
+			Stream dataStream = request.GetRequestStream();
+			dataStream.Write(bary, 0, bary.Length);
+			dataStream.Close();
+			try {
+				WebResponse response = request.GetResponse();
+
+				using (dataStream = response.GetResponseStream()) {
+					StreamReader reader = new StreamReader(dataStream);
+					string respString = reader.ReadToEnd();
+
+				}
+				response.Close();
+			} catch (Exception e) {
+				string msg = e.Message;
+			}
+			await turnContext.SendActivityAsync($"Added Temple Childrens");
+		}
+
+		private static async Task AddList(ITurnContext turnContext, CancellationToken cancellationToken) {
+			string url = $"{baseUrl}Lookups";
+
+
+
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+			request.ContentType = "application/json; charset=utf-8";
+			request.Method = "POST";
+			request.Accept = "application/json";
+			Lookup killeen = new Lookup("Killeen", "List of Areas for Hand Hygien facility Killeen");
+	
+
+
+			byte[] bary = Encoding.UTF8.GetBytes(killeen.serialize());
+			request.ContentLength = bary.Length;
+			Stream dataStream = request.GetRequestStream();
+			dataStream.Write(bary, 0, bary.Length);
+			dataStream.Close();
+			try {
+				WebResponse response = request.GetResponse();
+
+				using (dataStream = response.GetResponseStream()) {
+					StreamReader reader = new StreamReader(dataStream);
+					string respString = reader.ReadToEnd();
+
+				}
+				response.Close();
+			} catch (Exception e) {
+				string msg = e.Message;
+			}
+			await turnContext.SendActivityAsync($"Added Temple Childrens");
+		}
 
 		private static async Task DisplayFacilityChoicesAsync(ITurnContext turnContext, CancellationToken cancellationToken) {
 			string url = $"{baseUrl}/Lookups?$filter=Name eq 'Hospitals' or Name eq 'Clinics'&$expand=LookupItems";
@@ -97,11 +244,11 @@ namespace MyChatBot.Bots {
 
 			List<CardAction> buttons = new List<CardAction>();
 			foreach(Lookup lu in odata.Value) {
-				buttons.Add(new CardAction(title: lu.Name, type: ActionTypes.ImBack, value: $"List {lu.Name}"));
+				buttons.Add(new CardAction(title: lu.Name, type: ActionTypes.MessageBack, value: lu , displayText: $"List {lu.Name} facilities."));
 			}
 
 
-			var card = new HeroCard {
+			var card = new HeroCard { 
 				Title = "Hospital or Clinic",
 				Text = "Which type of facility do you need to manage?",
 				Buttons = buttons,
