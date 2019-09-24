@@ -7,6 +7,7 @@
  https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-primitive-prompts?view=azure-bot-service-4.0&tabs=csharp
  Working on state at the moment
 
+ for examples https://github.com/microsoft/BotBuilder-Samples.git
 
  https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-dialog?view=azure-bot-service-4.0
 
