@@ -26,10 +26,19 @@ using MyChatBot.Model;
 using Newtonsoft.Json;
 using System;
 using Microsoft.Extensions.Logging;
+using Microsoft.Bot.Builder.Azure;
 
 namespace MyChatBot.Bots {
 	//public class EchoBot<T> : ActivityHandler where T : Dialog {
 	public class EchoBot : ActivityHandler {
+	
+		private const string CosmosServiceEndpoint = "https://bswcloud-test-bot-state.documents.azure.com:443/";
+		private const string CosmosDBKey = "Lp54k9chuJxNElCWjfBAG90uDBj4hDKbJSIG7yxyz9FzUExrAu95aSK1fVKBeM2v8IlFlJXWHoEG7KQ8LAYHkw==";
+		private const string CosmosDBDatabaseId = "bswcloud-test-bot-state";
+		private const string CosmosDBContainerId = "bot-storage";
+  
+   
+
 		private string task;// { get; set;}
 								  //static readonly HttpClient client = new HttpClient();
 		static string baseUrl = "https://bswcloud.bswapi.com/odata/";
@@ -37,9 +46,15 @@ namespace MyChatBot.Bots {
 	
 		protected readonly BotState _conversationState;
 		protected readonly BotState _userState;
-	
 
 
+		private static readonly CosmosDbPartitionedStorage _myStorage = new CosmosDbPartitionedStorage(new CosmosDbPartitionedStorageOptions
+		{
+			CosmosDbEndpoint = CosmosServiceEndpoint,
+			AuthKey = CosmosDBKey,
+			DatabaseId = CosmosDBDatabaseId,
+			ContainerId = CosmosDBContainerId,
+		});
 		public EchoBot(ConversationState conversationState, UserState userState) {
 			_conversationState = conversationState;
 			_userState = userState;
