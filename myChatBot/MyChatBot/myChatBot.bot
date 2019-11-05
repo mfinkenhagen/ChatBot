@@ -1,0 +1,18 @@
+{
+    "name": "myChatBot",
+    "description": "",
+    "services": [
+        {
+            "type": "endpoint",
+            "appId": "",
+            "appPassword": "",
+            "endpoint": "http://localhost:3978/api/messages",
+            "id": "85dc8dc0-d598-11e9-9234-6521ac009f45",
+            "name": "http://localhost:3978/api/messages"
+        }
+    ],
+    "padlock": "",
+    "version": "2.0",
+    "overrides": null,
+    "path": "C:\\Users\\Mark\\Source\\Repos_GitHub\\ChatBot\\myChatBot\\MyChatBot\\myChatBot.bot"
+}
